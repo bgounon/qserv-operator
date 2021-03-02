@@ -39,7 +39,7 @@ create table `ingest_history` (
 
     CONSTRAINT `chunkfile_fk1`
       FOREIGN KEY (`chunkfile_id`)
-      REFERENCES `chunkfile` (`id`),
+      REFERENCES `chunkfile` (`id`)
 )
 ENGINE = InnoDB;
 
