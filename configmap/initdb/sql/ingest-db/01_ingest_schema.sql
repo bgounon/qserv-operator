@@ -19,7 +19,7 @@ CREATE TABLE `chunkfile_queue` (
   `chunk_file_path`       VARCHAR(255)        NOT NULL ,                  -- the path of the chunk file to load
   `database`              VARCHAR(255)        NOT NULL ,                  -- the name of the target database
   `is_overlap`            BOOLEAN             NOT NULL ,                  -- is this file an overlap
-  `locking_pod`           VARCHAR(255)        NOT NULL ,                  -- the id of the latest pod which has locked the chunk
+  `locking_pod`           VARCHAR(255)        DEFAULT NULL,          -- the id of the latest pod which has locked the chunk
   `succeed`               BOOLEAN             NULL ,                      -- the status of the file:
                                                                           --   - NULL (pending),
                                                                           --   - 0 (error during latest ingest attempt),
