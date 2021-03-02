@@ -19,7 +19,7 @@ CREATE TABLE `chunkfile_queue` (
   `chunk_file_path`       VARCHAR(255)        NOT NULL ,                  -- the path of the chunk file to load
   `database`              VARCHAR(255)        NOT NULL ,                  -- the name of the target database
   `is_overlap`            BOOLEAN             NOT NULL ,                  -- is this file an overlap
-  `locking_pod`           VARCHAR(255)        DEFAULT NULL,          -- the id of the latest pod which has locked the chunk
+  `locking_pod`           VARCHAR(255)        DEFAULT NULL,               -- the id of the latest pod which has locked the chunk
   `succeed`               BOOLEAN             NULL ,                      -- the status of the file:
                                                                           --   - NULL (pending),
                                                                           --   - 0 (error during latest ingest attempt),
@@ -28,18 +28,6 @@ CREATE TABLE `chunkfile_queue` (
 
   PRIMARY KEY (`id`),
   UNIQUE KEY (`chunk_id`, `chunk_file_path`, `database`, `is_overlap`, `table`)
-)
-ENGINE = InnoDB;
-
-create table `ingest_history` (
-    `chunkfile_id`   INTEGER UNSIGNED    NOT NULL ,
-    `ingest_time`    TIMESTAMP           NULL ,                            -- the date when this file is ingested in the current transaction
-    `pod`            VARCHAR(255)        NOT NULL ,                        -- the id of the pod which will ingest the chunk file
-    `transaction_id` INTEGER UNSIGNED    NOT NULL ,
-
-    CONSTRAINT `chunkfile_fk1`
-      FOREIGN KEY (`chunkfile_id`)
-      REFERENCES `chunkfile` (`id`)
 )
 ENGINE = InnoDB;
 
